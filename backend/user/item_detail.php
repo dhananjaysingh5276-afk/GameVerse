@@ -303,11 +303,19 @@ $user_coins = $stmt->get_result()->fetch_assoc()['coins'];
                     <?php elseif ($item['stock'] <= 0): ?>
                         <button class="btn btn-buy" disabled>❌ Out of Stock</button>
                     <?php else: ?>
-                        <a href="../purchase/buy.php?id=<?= $item['id'] ?>">
-                            <button class="btn btn-buy" <?= $user_coins < $item['price'] ? 'disabled' : '' ?>>
-                                Buy Now (<?= number_format($item['price']) ?> Coins)
-                            </button>
-                        </a>
+                       <?php if (!$owns_item && $item['stock'] > 0 && $user_coins >= $item['price']): ?>
+    <a href="../purchase/buy.php?id=<?= $item['id'] ?>">
+        <button class="btn btn-buy">
+            Buy Now (<?= number_format($item['price']) ?> Coins)
+        </button>
+    </a>
+<?php elseif ($owns_item): ?>
+    <button class="btn btn-own">✅ You Own This Item</button>
+<?php elseif ($item['stock'] <= 0): ?>
+    <button class="btn btn-buy" disabled>❌ Out of Stock</button>
+<?php else: ?>
+    <button class="btn btn-buy" disabled>❌ Insufficient Coins</button>
+<?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

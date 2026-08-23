@@ -308,15 +308,7 @@ $user_coins = $stmt->get_result()->fetch_assoc()['coins'];
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <h1 onclick="window.location.href='dashboard.php'">🎮 GamerVerse</h1>
-        <div class="nav-links">
-            <a href="../user/dashboard.php">🏠 Dashboard</a>
-            <a href="../user/browse.php" style="background:#2a2a4e;">🛒 Marketplace</a>
-            <span class="coins">🪙 <?= number_format($user_coins) ?></span>
-            <a href="../auth/logout.php" class="logout">Logout</a>
-        </div>
-    </nav>
+   <?php require_once __DIR__ . '/../includes/navbar.php'; ?>
 
     <div class="container">
         <form method="GET" class="filter-bar">

@@ -63,6 +63,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Register - GamerVerse</title>
     <style>
+        .password-wrapper {
+    position: relative;
+}
+.password-wrapper input {
+    width: 100%;
+    padding-right: 50px !important;
+}
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 20px;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+.password-toggle:hover {
+    color: #00aaff;
+}
+.password-toggle.active {
+    color: #00aaff;
+}
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -207,13 +231,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="email" name="email" placeholder="your@email.com" required>
             </div>
             <div class="form-group">
-                <label>🔒 Password (min 6 characters)</label>
-                <input type="password" name="password" placeholder="Create a password" required>
-            </div>
-            <div class="form-group">
-                <label>🔐 Confirm Password</label>
-                <input type="password" name="confirm_password" placeholder="Confirm your password" required>
-            </div>
+    <label>🔒 Password (min 6 characters)</label>
+    <div style="position: relative;">
+        <input type="password" name="password" id="reg_password" placeholder="Create a password" required style="width: 100%; padding-right: 50px;">
+        <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 20px; user-select: none;" 
+              onclick="togglePassword('reg_password', this)">
+            👁️
+        </span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label>🔐 Confirm Password</label>
+    <div style="position: relative;">
+        <input type="password" name="confirm_password" id="reg_confirm_password" placeholder="Confirm your password" required style="width: 100%; padding-right: 50px;">
+        <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 20px; user-select: none;" 
+              onclick="togglePassword('reg_confirm_password', this)">
+            👁️
+        </span>
+    </div>
+</div>
             <button type="submit" class="btn">🚀 Create Account</button>
         </form>
         
@@ -223,5 +260,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Already have an account? <a href="login.php">Login here</a>
         </div>
     </div>
+    <script>
+function togglePassword(inputId, eyeIcon) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.textContent = '🙈';
+        eyeIcon.style.color = '#00aaff';
+        eyeIcon.title = 'Hide password';
+    } else {
+        input.type = 'password';
+        eyeIcon.textContent = '👁️';
+        eyeIcon.style.color = '#888';
+        eyeIcon.title = 'Show password';
+    }
+}
+</script>
 </body>
 </html>

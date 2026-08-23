@@ -197,10 +197,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label>👤 Username</label>
                 <input type="text" name="username" placeholder="Enter your username" required>
             </div>
-            <div class="form-group">
-                <label>🔒 Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-            </div>
+            <!-- ====== PASSWORD FIELD WITH SHOW/HIDE ====== -->
+<div class="form-group">
+    <label>🔒 Password</label>
+    <div style="position: relative;">
+        <input type="password" name="password" id="login_password" placeholder="Enter your password" required style="width: 100%; padding-right: 50px;">
+        <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 20px; user-select: none;" 
+              onclick="togglePassword('login_password', this)">
+            👁️
+        </span>
+    </div>
+</div>
+
+<!-- ====== JAVASCRIPT ====== -->
+<script>
+function togglePassword(inputId, eyeIcon) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.textContent = '🙈';
+        eyeIcon.style.color = '#00aaff';
+        eyeIcon.title = 'Hide password';
+    } else {
+        input.type = 'password';
+        eyeIcon.textContent = '👁️';
+        eyeIcon.style.color = '#888';
+        eyeIcon.title = 'Show password';
+    }
+}
+</script>
             <button type="submit" class="btn">🔑 Login</button>
         </form>
         
