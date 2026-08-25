@@ -1,4 +1,6 @@
 <?php
+// Include CORS handler
+require_once __DIR__ . '/cors.php';
 // CORS Headers
 $allowed_origins = ['http://localhost:3000', 'http://localhost:3001'];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
