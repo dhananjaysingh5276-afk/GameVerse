@@ -1,4 +1,6 @@
 <?php
+// Include CORS handler
+require_once __DIR__ . '/cors.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
