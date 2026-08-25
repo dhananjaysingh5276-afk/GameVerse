@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // API Base URL (your PHP backend)
-const API_URL = "http://localhost/gamerVerse/backend/api/";
+const API_URL = "http://localhost/gameVerse/backend/api/";
 
 // Create axios instance
 const api = axios.create({
