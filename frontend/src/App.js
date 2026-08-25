@@ -16,7 +16,6 @@ import Dashboard from "./pages/Dashboard";
 import Marketplace from "./pages/Marketplace";
 import Inventory from "./pages/Inventory";
 import TransactionHistory from "./pages/TransactionHistory";
-
 // Styles
 import "./styles/App.css";
 
