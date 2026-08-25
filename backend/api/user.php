@@ -15,13 +15,13 @@ $response = ['success' => false, 'message' => ''];
 
 if (isLoggedIn()) {
     $user_id = $_SESSION['user_id'];
-    
+
     $query = "SELECT id, username, email, role, coins, avatar, bio, created_at FROM users WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
-    
+
     if ($user) {
         $response['success'] = true;
         $response['user'] = $user;
@@ -33,4 +33,3 @@ if (isLoggedIn()) {
 }
 
 echo json_encode($response);
-?>

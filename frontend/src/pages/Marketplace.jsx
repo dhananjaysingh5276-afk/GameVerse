@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback} from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { getItems } from '../services/api';
 
 const Marketplace = () => {
-    const { user } = useAuth();
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
@@ -13,6 +11,8 @@ const Marketplace = () => {
         search: '',
         sort: 'newest'
     });
+
+
 
     const fetchItems = useCallback(async () => {
         setLoading(true);
@@ -24,7 +24,11 @@ const Marketplace = () => {
         } finally {
             setLoading(false);
         }
-    };
+    },[filters]);
+
+    useEffect(() => {
+        fetchItems();
+    }, [fetchItems]);
 
     const handleFilterChange = (e) => {
         setFilters({ ...filters, [e.target.name]: e.target.value });
