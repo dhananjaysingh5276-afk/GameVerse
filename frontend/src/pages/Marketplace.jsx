@@ -14,11 +14,7 @@ const Marketplace = () => {
         sort: 'newest'
     });
 
-    useEffect(() => {
-        fetchItems();
-    }, [filters]);
-
-    const fetchItems = async () => {
+    const fetchItems = useCallback(async () => {
         setLoading(true);
         try {
             const response = await getItems(filters);
