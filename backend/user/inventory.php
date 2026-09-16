@@ -279,7 +279,7 @@ $gems = array_filter($inventory, function($item) { return $item['category'] == '
     </style>
 </head>
 <body>
-    <?php require_once __DIR__ . '/../includes/navbar.php'; ?>>
+    <?php require_once __DIR__ . '/../includes/navbar.php'; ?>
 
     <div class="container">
         <div class="header">

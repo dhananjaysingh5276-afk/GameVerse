@@ -233,8 +233,6 @@ $recent_transactions = $conn->query($transactions_query)->fetch_all(MYSQLI_ASSOC
         <div class="admin-actions">
             <a href="../admin/games/list.php">🎮 Manage Games</a>
             <a href="../admin/items/list.php">📦 Manage Items</a>
-            <a href="../admin/users/list.php">👤 Manage Users</a>
-            <a href="../admin/transactions/list.php">💳 View All Transactions</a>
         </div>
 
         <h3 class="section-title">📋 Recent Transactions</h3>

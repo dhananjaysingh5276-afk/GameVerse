@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import Marketplace from "./pages/Marketplace";
 import Inventory from "./pages/Inventory";
 import TransactionHistory from "./pages/TransactionHistory";
+import ItemDetail from "./pages/ItemDetail";
 // Styles
 import "./styles/App.css";
 
@@ -41,6 +42,14 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <Marketplace />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/item/:id"
+          element={
+            <ProtectedRoute>
+              <ItemDetail />
             </ProtectedRoute>
           }
         />

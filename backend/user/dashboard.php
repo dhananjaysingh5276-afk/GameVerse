@@ -218,7 +218,7 @@ $recent_items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         <div class="quick-actions">
             <a href="../user/browse.php" class="btn-primary">🛒 Browse Marketplace</a>
             <a href="../user/inventory.php" class="btn-secondary">🎮 My Collection</a>
-            <a href="../user/profile.php" class="btn-secondary">⚙️ Edit Profile</a>
+            <a href="../transactions/history.php" class="btn-secondary">📜 Transaction History</a>
         </div>
 
         <div class="stats-grid">
