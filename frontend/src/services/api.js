@@ -30,6 +30,7 @@ export const getItems = (filters) => {
   return api.get(`/items.php?${params}`);
 };
 export const getItem = (id) => api.get(`/item.php?id=${id}`);
+export const getGames = () => api.get("/games.php");
 
 // ============================================
 // PURCHASE API

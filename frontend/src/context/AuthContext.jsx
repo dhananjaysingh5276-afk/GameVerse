@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
             const response = await apiLogin(credentials);
             if (response.data.success) {
                 setUser(response.data.user);
-                return { success: true };
+                return { success: true, user: response.data.user };
             } else {
                 setError(response.data.message);
                 return { success: false, error: response.data.message };

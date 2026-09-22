@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 const AddGame = () => {
-    const { user } = useAuth();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -51,7 +49,7 @@ const AddGame = () => {
     return (
         <div className="container" style={{ maxWidth: '600px' }}>
             <h2 style={{ color: '#00aaff', marginBottom: '20px' }}>➕ Add New Game</h2>
-            
+
             {error && <div className="error">❌ {error}</div>}
             {success && <div className="success">✅ {success}</div>}
 

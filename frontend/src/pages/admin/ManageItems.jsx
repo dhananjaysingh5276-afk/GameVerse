@@ -55,10 +55,12 @@ const ManageItems = () => {
         <div className="container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
                 <h2 style={{ color: '#00aaff' }}>📦 Manage Items</h2>
-                <Link to="/admin/items/add" className="btn btn-primary" style={{ padding: '10px 20px', background: '#00aaff', color: '#fff', borderRadius: '6px', textDecoration: 'none' }}>
-                    + Add New Item
-                </Link>
-            </div>
+                        <div className="admin-actions">
+                        <Link to="/admin/items/add" className="btn btn-primary" style={{ padding: '10px 20px', background: '#00aaff', color: '#fff', borderRadius: '6px', textDecoration: 'none' }}>
+                            + Add New Item
+                        </Link>
+                    </div>
+                </div>
 
             {/* Filter */}
             <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', alignItems: 'center' }}>

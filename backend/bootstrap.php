@@ -38,12 +38,16 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // ============================================
-// 4. ERROR REPORTING (Development Only)
+// 4. ERROR REPORTING
 // ============================================
 
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// Log errors to the PHP error log instead of printing them.
+// Printing (display_errors) corrupts JSON API responses with HTML fragments
+// ("<br /><b>Warning</b>...") and breaks response.json() on the frontend.
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('log_errors', 1);
 
 // ============================================
 // 5. HELPER FUNCTIONS

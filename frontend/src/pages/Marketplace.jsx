@@ -1,9 +1,10 @@
 import React, { useState, useEffect , useCallback} from 'react';
 import { Link } from 'react-router-dom';
-import { getItems } from '../services/api';
+import { getItems, getGames } from '../services/api';
 
 const Marketplace = () => {
     const [items, setItems] = useState([]);
+    const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
         game: '',
@@ -26,9 +27,19 @@ const Marketplace = () => {
         }
     },[filters]);
 
+    const fetchGames = useCallback(async () => {
+        try {
+            const response = await getGames();
+            setGames(response.data || []);
+        } catch (error) {
+            console.error('Error fetching games:', error);
+        }
+    }, []);
+
     useEffect(() => {
         fetchItems();
-    }, [fetchItems]);
+        fetchGames();
+    }, [fetchItems, fetchGames]);
 
     const handleFilterChange = (e) => {
         setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -47,6 +58,9 @@ const Marketplace = () => {
             <div className="filter-bar">
                 <select name="game" onChange={handleFilterChange} value={filters.game}>
                     <option value="">All Games</option>
+                    {games.map((game) => (
+                        <option key={game.id} value={game.id}>{game.name}</option>
+                    ))}
                 </select>
 
                 <select name="category" onChange={handleFilterChange} value={filters.category}>

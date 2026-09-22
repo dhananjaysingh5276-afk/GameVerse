@@ -17,6 +17,15 @@ import Marketplace from "./pages/Marketplace";
 import Inventory from "./pages/Inventory";
 import TransactionHistory from "./pages/TransactionHistory";
 import ItemDetail from "./pages/ItemDetail";
+// Admin pages
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ManageGames from "./pages/admin/ManageGames";
+import ManageItems from "./pages/admin/ManageItems";
+import AddGame from "./pages/admin/AddGame";
+import AddItem from "./pages/admin/AddItem";
+import EditGame from "./pages/admin/EditGame";
+import EditItems from "./pages/admin/EditItems";
 // Styles
 import "./styles/App.css";
 
@@ -66,6 +75,66 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <TransactionHistory />
+            </ProtectedRoute>
+          }
+        />
+        {/* ============================================================
+            ADMIN (everything related to the admin login)
+        ============================================================ */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute adminOnly>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/games"
+          element={
+            <ProtectedRoute adminOnly>
+              <ManageGames />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/games/add"
+          element={
+            <ProtectedRoute adminOnly>
+              <AddGame />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/games/edit/:id"
+          element={
+            <ProtectedRoute adminOnly>
+              <EditGame />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/items"
+          element={
+            <ProtectedRoute adminOnly>
+              <ManageItems />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/items/add"
+          element={
+            <ProtectedRoute adminOnly>
+              <AddItem />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/items/edit/:id"
+          element={
+            <ProtectedRoute adminOnly>
+              <EditItems />
             </ProtectedRoute>
           }
         />

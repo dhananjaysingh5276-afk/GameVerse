@@ -52,8 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Insert user
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $insert = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-    $insert->bind_param("sss", $username, $email, $password_hash);
+// First registered user in an empty system becomes admin; everyone else is a regular user
+$role = 'user';
+if (!isAdmin()) {
+    $count = $conn->query("SELECT COUNT(*) AS total FROM users");
+    $total = $count ? intval($count->fetch_assoc()['total']) : 0;
+    if ($total === 0) {
+        $role = 'admin';
+    }
+}
+
+$insert = $conn->prepare("INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)");
+$insert->bind_param("ssss", $username, $email, $password_hash, $role);
     
     if ($insert->execute()) {
         $response['success'] = true;

@@ -17,7 +17,9 @@ const AdminDashboard = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch('http://localhost/gameVerse/backend/api/stats.php');
+            const response = await fetch('http://localhost/gameVerse/backend/api/stats.php', {
+                credentials: 'include'
+            });
             const data = await response.json();
             setStats(data);
         } catch (error) {
