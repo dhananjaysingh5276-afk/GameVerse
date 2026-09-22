@@ -26,6 +26,7 @@ import AddGame from "./pages/admin/AddGame";
 import AddItem from "./pages/admin/AddItem";
 import EditGame from "./pages/admin/EditGame";
 import EditItems from "./pages/admin/EditItems";
+import AdminTransactions from "./pages/admin/AdminTransactions";
 // Styles
 import "./styles/App.css";
 
@@ -135,6 +136,14 @@ const AppContent = () => {
           element={
             <ProtectedRoute adminOnly>
               <EditItems />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/transactions"
+          element={
+            <ProtectedRoute adminOnly>
+              <AdminTransactions />
             </ProtectedRoute>
           }
         />

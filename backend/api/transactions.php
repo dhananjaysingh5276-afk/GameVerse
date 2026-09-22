@@ -22,6 +22,21 @@ if (!isLoggedIn()) {
 
 $user_id = $_SESSION['user_id'];
 
+$showAll = isset($_GET['all']) && intval($_GET['all']) === 1 && isAdmin();
+
+if ($showAll) {
+    $query = "SELECT t.*, i.name as item_name, i.image_url, i.category, u.username
+              FROM transactions t
+              LEFT JOIN items i ON t.item_id = i.id
+              LEFT JOIN users u ON t.user_id = u.id
+              ORDER BY t.created_at DESC
+              LIMIT 200";
+
+    $response = $conn->query($query)->fetch_all(MYSQLI_ASSOC);
+    echo json_encode($response);
+    exit();
+}
+
 $query = "SELECT t.*, i.name as item_name, i.image_url, i.category 
           FROM transactions t 
           LEFT JOIN items i ON t.item_id = i.id 
