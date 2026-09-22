@@ -10,7 +10,8 @@ const AddItem = () => {
         category: '',
         price: '',
         description: '',
-        image_url: ''
+        image_url: '',
+        stock: 10
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -98,6 +99,11 @@ const AddItem = () => {
                 <div className="form-group">
                     <label>Price *</label>
                     <input type="number" name="price" step="0.01" min="0" onChange={handleChange} required />
+                </div>
+
+                <div className="form-group">
+                    <label>Stock *</label>
+                    <input type="number" name="stock" min="1" value={formData.stock} onChange={handleChange} required />
                 </div>
 
                 <div className="form-group">

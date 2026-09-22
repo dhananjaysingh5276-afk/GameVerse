@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $attribute = $data['attribute'] ?? null;
     $special_effect = $data['special_effect'] ?? null;
     $description = $data['description'] ?? null;
-    $stock = isset($data['stock']) ? intval($data['stock']) : 0;
+    $stock = isset($data['stock']) ? intval($data['stock']) : 10;
 
     if (empty($name)) {
         http_response_code(400);
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $attribute = $data['attribute'] ?? null;
     $special_effect = $data['special_effect'] ?? null;
     $description = $data['description'] ?? null;
-    $stock = isset($data['stock']) ? intval($data['stock']) : 0;
+    $stock = isset($data['stock']) ? intval($data['stock']) : 10;
 
     if (empty($name)) {
         http_response_code(400);
@@ -152,29 +152,38 @@ $category_filter = isset($_GET['category']) ? $_GET['category'] : '';
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
 $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 100;
+$showAll = isset($_GET['all']) && intval($_GET['all']) === 1;
 
 $query = "SELECT i.*, g.name as game_name 
           FROM items i 
-          JOIN games g ON i.game_id = g.id 
-          WHERE i.stock > 0";
+          JOIN games g ON i.game_id = g.id ";
+
+if (!$showAll) {
+    $query .= "WHERE i.stock > 0";
+}
 
 $params = [];
 $types = "";
+$clause = $showAll ? '' : 'WHERE ';
+$whereAdded = $showAll ? false : true;
 
 if ($game_filter > 0) {
-    $query .= " AND i.game_id = ?";
+    $query .= ($whereAdded ? " AND" : $clause) . " i.game_id = ?";
+    $whereAdded = true;
     $params[] = $game_filter;
     $types .= "i";
 }
 
 if ($category_filter) {
-    $query .= " AND i.category = ?";
+    $query .= ($whereAdded ? " AND" : $clause) . " i.category = ?";
+    $whereAdded = true;
     $params[] = $category_filter;
     $types .= "s";
 }
 
 if ($search) {
-    $query .= " AND (i.name LIKE ? OR i.description LIKE ?)";
+    $query .= ($whereAdded ? " AND" : $clause) . " (i.name LIKE ? OR i.description LIKE ?)";
+    $whereAdded = true;
     $search_term = "%$search%";
     $params[] = $search_term;
     $params[] = $search_term;

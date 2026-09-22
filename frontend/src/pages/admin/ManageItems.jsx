@@ -14,7 +14,7 @@ const ManageItems = () => {
     const fetchData = async () => {
         try {
             const [itemsRes, gamesRes] = await Promise.all([
-                fetch('http://localhost/gameVerse/backend/api/items.php'),
+                fetch('http://localhost/gameVerse/backend/api/items.php?all=1'),
                 fetch('http://localhost/gameVerse/backend/api/games.php')
             ]);
             const itemsData = await itemsRes.json();
